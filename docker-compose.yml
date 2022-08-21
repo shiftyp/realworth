@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: DocsBuilder.Dockerfile
+    image: docs_builder
+
+  web:
+    depends_on:
+      - builder
+    build:
+      context: .
+      dockerfile: DocsServer.Dockerfile
+    image: doc-server
+    ports:
+    - "8080:80"
+    environment:
+    - NGINX_HOST=foobar.com
+    - NGINX_PORT=80

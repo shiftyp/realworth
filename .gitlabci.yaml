@@ -1,0 +1,60 @@
+stages:
+  - build
+  - deploy
+
+# this hidden job is specific to our Ansible
+# it deploys a named ("techblog") docker container
+# see https://blog.callr.tech/gitlab-ansible-docker-ci-cd/
+Deploy:
+  stage: deploy
+  steps:
+    - name: Deploy
+    uses: peaceiris/actions-gh-pages@v3
+    with:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      publish_dir: /site/public
+
+Checkoug:
+  stage: build
+  # remember to use specific version in your build images
+  # see https://blog.callr.tech/building-docker-images-with-gitlab-ci-best-practices/
+  image: docker:18-git 
+  # we only build the "master" branch
+  only:
+    - master
+  # fetching submodules here because usually themes are git submodules
+  # see also the commented variables below
+  before_script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+  script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    # the image is tagged as latest, because it is the master branch
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
+  # variables:
+  #   GIT_SUBMODULE_STRATEGY: recursive
+  # -> this did not work for us, we had to use before_script above.
+  # -> SSL certificate problem: unable to get local issuer certificate
+  # -> https://gitlab.com/gitlab-org/gitlab-runner/issues/2148?
+  # -> maybe an http proxy issue specific to our platform.
+
+Deploy:
+  stage: deploy
+  script: *deploy
+  allow_failure: false
+  # deploying master only
+  only:
+    - master
+  environment:
+    name: production
+  # we tag specific runners here in our platform
+  tags:
+    - deployment
+  variables:
+    # because the deployment stage does not need the source code anymore
+    # we set GIT_STRATEGY to none
+    GIT_STRATEGY: none
+    # those variables are being used in the *deploy hidden job (above)
+    ANSIBLE_INVENTORY: prod
+    ANSIBLE_SUBSET: all
