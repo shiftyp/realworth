@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  serve:
+    image: minidocks/mkdocs
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    ports:
+    - "8000:8000"
+    

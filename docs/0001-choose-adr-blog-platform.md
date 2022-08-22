@@ -4,7 +4,10 @@ Date: 2022-08-20
 
 ## Status
 
-Status: Accepted on 2022-08-20  
+Status: Superseded on 2022-08-22  
+Superseded by [0002-documentation-generation-with-mkdocs.md](0002-documentation-generation-with-mkdocs.md) on 2022-08-22  
+Previous status: Accepted on 2022-08-20  
+
 
 
 ## Context
