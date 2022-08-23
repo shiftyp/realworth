@@ -5,6 +5,7 @@ Date: 2022-08-22
 ## Status
 
 Status: Accepted on 2022-08-22  
+Amended by [0005-update-mkdocs-theme.md](0005-update-mkdocs-theme.md) on 2022-08-23  
 Supersedes [0001-choose-adr-blog-platform.md](0001-choose-adr-blog-platform.md) on 2022-08-22
 
 ## Context

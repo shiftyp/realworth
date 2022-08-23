@@ -1,5 +1,4 @@
 site_name: RealWorth
 theme:
-  name: null
-  custom_dir: 'docs/theme/cinder'
+  name: material
 site_url: https://shiftyp.github.io/realworth
