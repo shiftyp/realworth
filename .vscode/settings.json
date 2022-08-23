@@ -1,5 +1,5 @@
 {
     "adr.project.directory": "docs/adrs",
-    "adr.templates.directory": ".adr-templates",
+    "adr.templates.directory": "docs/adr-templates",
     "adr.templates.repo": "https://github.com/vincent-ledu/adr-template.git"
 }

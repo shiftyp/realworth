@@ -1,3 +1,6 @@
 [submodule "docs/theme"]
 	path = docs/theme
 	url = https://github.com/chrissimpkins/cinder.git
+[submodule "docs/adr-templates"]
+	path = docs/adr-templates
+	url = https://github.com/vincent-ledu/adr-template.git
