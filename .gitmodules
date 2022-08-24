@@ -1,0 +1,3 @@
+[submodule "docs/adr-templates"]
+	path = docs/adr-templates
+	url = https://github.com/vincent-ledu/adr-template.git

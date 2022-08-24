@@ -1,3 +1,4 @@
 site_name: RealWorth
-theme: readthedocs
+theme:
+  name: material
 site_url: https://shiftyp.github.io/realworth
